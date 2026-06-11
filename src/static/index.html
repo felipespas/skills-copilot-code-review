@@ -23,11 +23,22 @@
           </button>
           <div id="user-info" class="hidden">
             <span id="display-name"></span>
+            <button id="manage-announcements-button" class="hidden" aria-label="Manage announcements">
+              Manage Announcements
+            </button>
             <button id="logout-button">Logout</button>
           </div>
         </div>
       </div>
     </header>
+
+    <section id="announcement-container" class="announcement-panel hidden" aria-live="polite">
+      <div class="announcement-title-row">
+        <h3>School Announcements</h3>
+        <span class="announcement-icon" aria-hidden="true">📣</span>
+      </div>
+      <div id="announcement-list" class="announcement-list"></div>
+    </section>
 
     <main>
       <section id="activities-container">
@@ -134,8 +145,39 @@
       </div>
     </div>
 
-    <div class="announcement-banner">
-      📢 Activity registration is open until the end of the month. Don't lose your spot!
+    <!-- Announcement Management Modal -->
+    <div id="announcements-modal" class="modal hidden" role="dialog" aria-modal="true" aria-label="Announcement management">
+      <div class="modal-content announcements-modal-content">
+        <span class="close-announcements-modal" aria-label="Close announcement manager">&times;</span>
+        <div class="announcements-modal-layout">
+          <section class="announcements-list-section">
+            <h3>Existing Announcements</h3>
+            <div id="announcements-management-list" class="announcements-management-list"></div>
+          </section>
+          <section class="announcements-form-section">
+            <h3 id="announcement-form-title">Create Announcement</h3>
+            <form id="announcement-form">
+              <input type="hidden" id="announcement-id" />
+              <div class="form-group">
+                <label for="announcement-text">Message:</label>
+                <textarea id="announcement-text" required maxlength="280" placeholder="Write a concise announcement for students and families"></textarea>
+              </div>
+              <div class="form-group">
+                <label for="announcement-starts-at">Start date (optional):</label>
+                <input type="date" id="announcement-starts-at" />
+              </div>
+              <div class="form-group">
+                <label for="announcement-expires-at">Expiration date:</label>
+                <input type="date" id="announcement-expires-at" required />
+              </div>
+              <div class="announcement-form-actions">
+                <button type="button" id="announcement-cancel">Clear</button>
+                <button type="submit" id="announcement-submit">Publish Announcement</button>
+              </div>
+            </form>
+          </section>
+        </div>
+      </div>
     </div>
 
     <script src="app.js"></script>
